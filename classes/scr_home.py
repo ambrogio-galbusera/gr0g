@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 
-class Screen1 :
+class ScreenHome :
     # The city and timezone that you want to display.
     city_name = "Sheffield"
     time_zone = "Europe/London"
@@ -27,7 +27,7 @@ class Screen1 :
     margin = 3
 
     def __init__ (self,d,ds) :
-        print("[SCR1] Initialized\n")
+        print("[HOME] Initialized\n")
         self.display = d
         self.ds = ds
         self.start_time = time.time()

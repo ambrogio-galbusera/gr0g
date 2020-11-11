@@ -1,14 +1,14 @@
-from screen1 import Screen1
-from screen2 import Screen2
+from scr_home import ScreenHome
+from scr_tempgraph import ScreenTemperatureGraph
+from scr_humigraph import ScreenHumidityGraph
+from scr_lightgraph import ScreenLightGraph
 
 class ScreenManager :
     def __init__ (self, d, ds) :
         print("[SCRM] Initialized\n")
         self.display = d
         self.ds = ds
-        self.screen1 = Screen1(d, ds)
-        self.screen2 = Screen2(d, ds)
-        self.screens = [self.screen1, self.screen2]
+        self.screens = [ScreenHome(d,ds), ScreenTemperatureGraph(d,ds), ScreenHumidityGraph(d,ds), ScreenLightGraph(d,ds)]
         self.currIdx = 0
         self.currScreen = self.screens[self.currIdx]
 

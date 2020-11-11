@@ -9,12 +9,12 @@ from datetime import datetime, timedelta
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 
-class Screen3 :
+class ScreenHumidityGraph :
     # Margins
     margin = 3
 
     def __init__ (self,d,ds) :
-        print("[SCR2] Initialized\n")
+        print("[HUMG] Initialized\n")
         self.display = d
         self.ds = ds
 

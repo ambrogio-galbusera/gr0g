@@ -9,12 +9,12 @@ from datetime import datetime, timedelta
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 
-class Screen4 :
+class ScreenLightGraph :
     # Margins
     margin = 3
 
     def __init__ (self,d,ds) :
-        print("[SCR2] Initialized\n")
+        print("[LGTG] Initialized\n")
         self.display = d
         self.ds = ds
 
