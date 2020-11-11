@@ -13,11 +13,11 @@ class Display:
         # Create ST7735 LCD display class
         self.st7735 = ST7735.ST7735(
             port=0,
-            cs=1,
+            cs=ST7735.BG_SPI_CS_FRONT,
             dc=9,
-            backlight=12,
+            backlight=25,
             rotation=270,
-            spi_speed_hz=10000000
+            spi_speed_hz=4000000
         )
 
         # Initialize display
@@ -34,13 +34,21 @@ class Display:
         self.font = ImageFont.truetype(UserFont, self.font_size_large)
         self.smallfont = ImageFont.truetype(UserFont, self.font_size_small)
 
-    def drawInit (self) :
+    def drawInit (self,color=(255,255,255)) :
         print("[DISP] Draw init\n")
-        self.draw.rectangle((0, 0, self.WIDTH, self.HEIGHT), (255, 255, 255))
+        self.draw.rectangle((0, 0, self.WIDTH, self.HEIGHT), color)
+
+    def background (self, bg) :
+        self.img = bg;
+        self.draw = ImageDraw.Draw(self.img)
 
     def update (self) :
         print("[DISP] Update\n")
         self.st7735.display(self.img)
+
+    def rect (self,x,y,w,h) :
+         print("[DISP] Rectangle ({}, {}, {}, {})\n".format(x,y,w,h))
+         self.draw.rectangle((x, y, x+w, y+h), (0,0,0))
 
     def icon (self,pos,aicon) :
         self.img.paste(aicon, pos, mask=aicon)
@@ -54,6 +62,7 @@ class Display:
         self.draw.text(pos,text,font=self.font, fill=(0, 0, 0))
 
     def overlay_text(self,pos, text, font_large, align_right=False, rectangle=False):
+        print("[DISP] Overlay text ({}) {}\n".format(pos,text))
         font = self.smallfont
         if font_large:
             font = self.font
