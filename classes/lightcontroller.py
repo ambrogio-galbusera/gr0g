@@ -26,6 +26,7 @@ class LightController :
             nightDuration = self.sett.nightDuration * 60
             if (delta > nightDuration) :
                 self.isNight = False
+                self.startTime = time.time()
             else :
                 v = 0
         else :
@@ -34,10 +35,11 @@ class LightController :
 
            if (delta < dimInterval) :
                v = int((delta / dimInterval) * 100)
-           elif (delta > dayDuration - dimInterval) :
-               v = 100 - int(((dayDuration-delta) / dimInterval) * 100)
            elif (delta > dayDuration) :
                self.isNight = True
+               self.startTime = time.time()
+           elif (delta > dayDuration - dimInterval) :
+               v = int(((dayDuration-delta) / dimInterval) * 100)
            else :
                v = 100
 

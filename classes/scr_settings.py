@@ -45,8 +45,7 @@ class ScreenSettings :
                     self.update()
 
         else :
-#            if (self.keypad.downPressed()) :
-             if (True) :
+            if (self.keypad.downPressed()) :
                 self.subIdx = 0
                 self.subScreen = self.initEditScreen(self.subIdx)
                 self.subScreen.update()

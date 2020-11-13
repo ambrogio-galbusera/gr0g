@@ -12,7 +12,7 @@ class ScreenManager :
         self.sett = sett
         self.keypad = kp
         self.screens = [ScreenHome(d,ds,sett,kp), ScreenTemperatureGraph(d,ds,sett,kp), ScreenHumidityGraph(d,ds,sett,kp), ScreenLightGraph(d,ds,sett,kp), ScreenSettings(d,ds,sett,kp)]
-        self.currIdx = 4
+        self.currIdx = 0
         self.currScreen = self.screens[self.currIdx]
 
     def update (self) :

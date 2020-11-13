@@ -1,7 +1,7 @@
 class AppSettings :
     # in minutes
-    dayDuration = 720
-    nightDuration = 720
+    dayDuration = 4
+    nightDuration = 1
 
     # in seconds
     sprayPeriod = 600
