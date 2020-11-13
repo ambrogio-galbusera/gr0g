@@ -10,7 +10,7 @@ class Led:
         gu.pwm_set(self.led_channel,self.led_freq,0)
 
     def set (self,dc) :
-        print("[LED ] Setting PWM to {}".format(dc))
+        #print("[LED ] Setting PWM to {}".format(dc))
         gu.pwm_set(self.led_channel,self.led_freq,dc)
 
     def off (self) :
