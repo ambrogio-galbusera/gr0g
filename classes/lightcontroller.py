@@ -7,6 +7,7 @@ class LightController :
         self.ds = ds
         self.sett = sett
         self.pid = PID(0,1,1)
+        self.lastValue = None
         self.led1 = Led(2)
         self.led2 = Led(3)
 
@@ -14,6 +15,9 @@ class LightController :
         t = self.ds.get_lux()
         v = self.pid(t)
 
-        print("[LIGC] Process {} -> {}".format(t, v))
-        self.led1.set(v)
-        self.led2.set(v)
+        if (self.lastValue is None or self.lastValue != v) :
+            print("[LIGC] Process {} -> {}".format(t, v))
+
+            self.led1.set(v)
+            self.led2.set(v)
+            self.lastValue = v

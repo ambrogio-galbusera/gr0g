@@ -30,24 +30,35 @@ class App :
         self.evc = EVController(self.ds, self.sett)
         self.screenMngr = ScreenManager(self.d, self.ds, self.sett, self.keypad)
 
-    def process (self) :
-        #self.ds.add_humidity(sensors.humidity())
-        #self.ds.add_temperature(sensors.temperature())
-        #self.ds.add_lux(sensors.lux())
+        self.processStart = 0
+        self.screensStart = 0
 
-        self.lightc.process()
-        self.condc.process()
-        self.fanc.process()
-        self.evc.process()
+    def process (self) :
+        delta = time.time() - self.processStart
+        if (delta > 1.0) :
+            #self.ds.add_humidity(sensors.humidity())
+            #self.ds.add_temperature(sensors.temperature())
+            #self.ds.add_lux(sensors.lux())
+
+            self.lightc.process()
+            self.condc.process()
+            self.fanc.process()
+            self.evc.process()
+
+            self.processStart = time.time()
 
     def handleScreens (self) :
-        self.screenMngr.update()
+        delta = time.time() - self.screensStart
+        if (delta > 1.0) :
+            self.screenMngr.update()
+            self.screensStart = time.time()
+
         self.screenMngr.process()
 
 
-
 app = App()
+cntr = 0
 while True :
-    #app.process()
+    app.process()
     app.handleScreens()
-    time.sleep(1)
+    time.sleep(0.1)

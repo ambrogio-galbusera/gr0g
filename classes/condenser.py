@@ -1,7 +1,7 @@
 import gertutil as gu
 
 class Condenser:
-    cond_channel = 0
+    cond_channel = 1
     cond_freq = 1000
 
     def __init__ (self) :

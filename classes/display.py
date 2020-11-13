@@ -37,7 +37,7 @@ class Display:
         self.mediumfont = ImageFont.truetype(UserFont, self.font_size_medium)
 
     def drawInit (self,color=(255,255,255)) :
-        print("[DISP] Draw init")
+        #print("[DISP] Draw init")
         self.draw.rectangle((0, 0, self.WIDTH, self.HEIGHT), color)
 
     def background (self, bg) :
@@ -45,11 +45,11 @@ class Display:
         self.draw = ImageDraw.Draw(self.img)
 
     def update (self) :
-        print("[DISP] Update")
+        #print("[DISP] Update")
         self.st7735.display(self.img)
 
     def rect (self,x,y,w,h) :
-         print("[DISP] Rectangle ({}, {}, {}, {})".format(x,y,w,h))
+         #print("[DISP] Rectangle ({}, {}, {}, {})".format(x,y,w,h))
          self.draw.rectangle((x, y, x+w, y+h), (0,0,0))
 
     def icon (self,pos,aicon) :
@@ -60,11 +60,11 @@ class Display:
         self.draw = ImageDraw.Draw(self.img)
 
     def text (self,pos,text) :
-        print("[DISP] Text ({}) {}".format(pos,text))
+        #print("[DISP] Text ({}) {}".format(pos,text))
         self.draw.text(pos,text,font=self.font, fill=(0, 0, 0))
 
     def overlay_text(self,pos, text, font_size, align_right=False, rectangle=False):
-        print("[DISP] Overlay text ({}) {}".format(pos,text))
+        #print("[DISP] Overlay text ({}) {}".format(pos,text))
         font = self.smallfont
         if font_size == 1:
             font = self.mediumfont

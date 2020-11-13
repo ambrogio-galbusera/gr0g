@@ -26,7 +26,7 @@ class ScreenEdit :
         return self.value
 
     def process (self) :
-        print("[EDIT] Process")
+        #print("[EDIT] Process")
         if (self.keypad.upPressed()) :
             # increment & update
             self.value += self.step()

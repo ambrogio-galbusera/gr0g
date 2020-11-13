@@ -10,19 +10,27 @@ class Keypad:
         self.right = Button(3)
 
     def upPressed (self) :
-        print("[KEYP] UP?")
+        if (self.up.is_pressed) :
+            print("[KEYP] UP")
+
         return self.up.is_pressed
 
     def downPressed (self) :
-        print("[KEYP] DOWN?")
+        if (self.down.is_pressed) :
+            print("[KEYP] DOWN")
+
         return self.down.is_pressed
 
     def leftPressed (self) :
-        print("[KEYP] LEFT?")
+        if (self.left.is_pressed) :
+            print("[KEYP] LEFT")
+
         return self.left.is_pressed
 
     def rightPressed (self) :
-        print("[KEYP] RIGHT?")
+        if (self.right.is_pressed) :
+            print("[KEYP] RIGHT")
+
         return self.right.is_pressed
 
 

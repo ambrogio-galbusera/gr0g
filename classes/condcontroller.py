@@ -12,12 +12,18 @@ class CondController :
         print("[CONC] Initialized")
         self.ds = ds
         self.sett = sett
-        self.pid = PID(0,1,1);
+        self.pid = PID(Kp=1, output_limits=(0,100));
+        self.lastValue = None
         self.condenser = Condenser()
 
     def process (self) :
         t = self.ds.get_humidity()
+
+        self.pid.setpoint = self.sett.humiditySetpoint
         v = self.pid(t)
 
-        print("[CONC] Process {} -> {}".format(t,v))
-        self.condenser.set(v)
+        if (self.lastValue is None or self.lastValue != v) :
+            print("[CONC] Process {} -> {}".format(t,v))
+
+            self.condenser.set(v)
+            self.lastValue = v

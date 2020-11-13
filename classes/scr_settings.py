@@ -16,7 +16,7 @@ class ScreenSettings :
         self.subScreen = None
 
     def process (self) :
-        print("[SETT] Process")
+        #print("[SETT] Process")
         if (self.subIdx != -1) :
             # editing settings
             self.subScreen.process()
