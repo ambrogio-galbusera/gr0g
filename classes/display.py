@@ -8,7 +8,7 @@ from fonts.ttf import RobotoMedium as UserFont
 class Display:
 
     def __init__ (self) :
-        print("[DISP] Initialized\n")
+        print("[DISP] Initialized")
 
         # Create ST7735 LCD display class
         self.st7735 = ST7735.ST7735(
@@ -30,12 +30,14 @@ class Display:
         self.img = Image.new('RGBA', (self.WIDTH, self.HEIGHT), color=(0, 0, 0))
         self.draw = ImageDraw.Draw(self.img)
         self.font_size_small = 10
+        self.font_size_medium = 15
         self.font_size_large = 20
-        self.font = ImageFont.truetype(UserFont, self.font_size_large)
+        self.largefont = ImageFont.truetype(UserFont, self.font_size_large)
         self.smallfont = ImageFont.truetype(UserFont, self.font_size_small)
+        self.mediumfont = ImageFont.truetype(UserFont, self.font_size_medium)
 
     def drawInit (self,color=(255,255,255)) :
-        print("[DISP] Draw init\n")
+        print("[DISP] Draw init")
         self.draw.rectangle((0, 0, self.WIDTH, self.HEIGHT), color)
 
     def background (self, bg) :
@@ -43,11 +45,11 @@ class Display:
         self.draw = ImageDraw.Draw(self.img)
 
     def update (self) :
-        print("[DISP] Update\n")
+        print("[DISP] Update")
         self.st7735.display(self.img)
 
     def rect (self,x,y,w,h) :
-         print("[DISP] Rectangle ({}, {}, {}, {})\n".format(x,y,w,h))
+         print("[DISP] Rectangle ({}, {}, {}, {})".format(x,y,w,h))
          self.draw.rectangle((x, y, x+w, y+h), (0,0,0))
 
     def icon (self,pos,aicon) :
@@ -58,14 +60,16 @@ class Display:
         self.draw = ImageDraw.Draw(self.img)
 
     def text (self,pos,text) :
-        print("[DISP] Text ({}) {}\n".format(pos,text))
+        print("[DISP] Text ({}) {}".format(pos,text))
         self.draw.text(pos,text,font=self.font, fill=(0, 0, 0))
 
-    def overlay_text(self,pos, text, font_large, align_right=False, rectangle=False):
-        print("[DISP] Overlay text ({}) {}\n".format(pos,text))
+    def overlay_text(self,pos, text, font_size, align_right=False, rectangle=False):
+        print("[DISP] Overlay text ({}) {}".format(pos,text))
         font = self.smallfont
-        if font_large:
-            font = self.font
+        if font_size == 1:
+            font = self.mediumfont
+        if font_size == 2:
+            font = self.largefont
 
         w, h = font.getsize(text)
         if align_right:

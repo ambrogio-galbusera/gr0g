@@ -8,9 +8,10 @@ from condenser import Condenser
 from simple_pid import PID
 
 class CondController :
-    def __init__ (self, ds) :
-        print("[CONC] Initialized\n")
+    def __init__ (self, ds, sett) :
+        print("[CONC] Initialized")
         self.ds = ds
+        self.sett = sett
         self.pid = PID(0,1,1);
         self.condenser = Condenser()
 

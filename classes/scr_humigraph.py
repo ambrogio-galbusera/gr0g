@@ -13,10 +13,12 @@ class ScreenHumidityGraph :
     # Margins
     margin = 3
 
-    def __init__ (self,d,ds) :
-        print("[HUMG] Initialized\n")
+    def __init__ (self,d,ds,sett,kp) :
+        print("[HUMG] Initialized")
         self.display = d
         self.ds = ds
+        self.sett = sett
+        self.keypad = kp
 
     def update (self) :
         self.display.drawInit((128,128,128))
@@ -34,7 +36,7 @@ class ScreenHumidityGraph :
 
         humidity = self.ds.get_humidity()
         humidity_string = f"{humidity:.0f}%"
-        self.display.overlay_text((68, 0), humidity_string, font_large=True, align_right=True, rectangle=True)
+        self.display.overlay_text((68, 0), humidity_string, font_size=2, align_right=True, rectangle=True)
         humidity_icon = Image.open(f"{path}/icons/humidity.png")
         self.display.icon((self.margin, 0), humidity_icon)
 

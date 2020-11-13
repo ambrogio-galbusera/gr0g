@@ -26,10 +26,12 @@ class ScreenHome :
     # Margins
     margin = 3
 
-    def __init__ (self,d,ds) :
-        print("[HOME] Initialized\n")
+    def __init__ (self,d,ds,sett,kp) :
+        print("[HOME] Initialized")
         self.display = d
         self.ds = ds
+        self.sett = sett
+        self.keypad = kp
         self.start_time = time.time()
         self.cpu_temps = [self.ds.get_cpu_temperature()] * 5
         self.factor = 2.25
@@ -37,7 +39,8 @@ class ScreenHome :
         self.max_temp = None
 
     def process (self) :
-        print("TODO")
+        print("[HOME] Process")
+        return (self.keypad.rightPressed() or self.keypad.leftPressed())
 
     def update (self) :
         self.display.drawInit()
@@ -62,27 +65,27 @@ class ScreenHome :
                self.max_temp = temperature
 
         temp_string = f"{temperature:.0f}°C"
-        self.display.overlay_text((80, 12), temp_string, font_large=True, align_right=True, rectangle=True)
+        self.display.overlay_text((80, 12), temp_string, font_size=2, align_right=True, rectangle=True)
         spacing = self.display.font.getsize(temp_string)[1] + 1
         if self.min_temp is not None and self.max_temp is not None:
             range_string = f"{self.min_temp:.0f}-{self.max_temp:.0f}"
         else:
             range_string = "------"
-        self.display.overlay_text((80, 12 + spacing), range_string, font_large=False, align_right=True, rectangle=True)
+        self.display.overlay_text((80, 12 + spacing), range_string, font_size=0, align_right=True, rectangle=True)
         temp_icon = Image.open(f"{path}/icons/temperature.png")
         self.display.icon((self.margin, 12), temp_icon)
 
         # Humidity
         humidity = self.ds.get_humidity()
         humidity_string = f"{humidity:.0f}%"
-        self.display.overlay_text((80, 48), humidity_string, font_large=True, align_right=True, rectangle=True)
+        self.display.overlay_text((80, 48), humidity_string, font_size=2, align_right=True, rectangle=True)
         humidity_icon = Image.open(f"{path}/icons/humidity.png")
         self.display.icon((self.margin, 48), humidity_icon)
 
         # Light
         light = self.ds.get_lux()
         light_string = f"{int(light):,}"
-        self.display.overlay_text((self.display.WIDTH - self.margin, 12), light_string, font_large=True, align_right=True, rectangle=True)
+        self.display.overlay_text((self.display.WIDTH - self.margin, 12), light_string, font_size=2, align_right=True, rectangle=True)
         light_icon = Image.open(f"{path}/icons/bulb-light.png")
         self.display.icon((90, 12), light_icon)
 

@@ -13,13 +13,15 @@ class ScreenTemperatureGraph :
     # Margins
     margin = 3
 
-    def __init__ (self,d,ds) :
-        print("[TMPG] Initialized\n")
+    def __init__ (self,d,ds,sett,kp) :
+        print("[TMPG] Initialized")
         self.display = d
         self.ds = ds
+        self.sett = sett
+        self.keypad = kp
 
     def process (self) :
-        print("TODO")
+        print("[TMPG] TODO")
 
     def update (self) :
         self.display.drawInit((128,128,128))
@@ -49,13 +51,13 @@ class ScreenTemperatureGraph :
 
         temperature = self.ds.get_temperature()
         temp_string = f"{temperature:.0f}°C"
-        self.display.overlay_text((80, 0), temp_string, font_large=True, align_right=True, rectangle=True)
+        self.display.overlay_text((80, 0), temp_string, font_size=2, align_right=True, rectangle=True)
         spacing = self.display.font.getsize(temp_string)[1] + 1
         if min_temp is not None and max_temp is not None:
             range_string = f"{min_temp:.0f}-{max_temp:.0f}"
         else:
             range_string = "------"
-        self.display.overlay_text((80, 0 + spacing), range_string, font_large=False, align_right=True, rectangle=True)
+        self.display.overlay_text((80, 0 + spacing), range_string, font_size=2, align_right=True, rectangle=True)
         temp_icon = Image.open(f"{path}/icons/temperature.png")
         self.display.icon((self.margin, 0), temp_icon)
 
