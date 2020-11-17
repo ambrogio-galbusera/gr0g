@@ -38,6 +38,9 @@ class Display:
 
     def drawInit (self,color=(255,255,255)) :
         #print("[DISP] Draw init")
+        self.img = Image.new('RGBA', (self.WIDTH, self.HEIGHT), color=color)
+        self.draw = ImageDraw.Draw(self.img)
+
         self.draw.rectangle((0, 0, self.WIDTH, self.HEIGHT), color)
 
     def background (self, bg) :

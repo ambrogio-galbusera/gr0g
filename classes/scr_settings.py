@@ -16,16 +16,16 @@ class ScreenSettings :
         self.subScreen = None
 
     def process (self) :
-        #print("[SETT] Process")
+        #print("[SETT] Process {}".format(self.subIdx))
         if (self.subIdx != -1) :
             # editing settings
             self.subScreen.process()
 
             if (self.keypad.rightPressed()) :
                 # next screen
-                self.saveValue()
+                self.saveValue(self.subIdx)
 
-                if (self.subIdx < 6) :
+                if (self.subIdx < 5) :
                     self.subIdx = self.subIdx + 1
                     self.subScreen = self.initEditScreen(self.subIdx)
                     self.subScreen.update()
@@ -34,7 +34,7 @@ class ScreenSettings :
                     self.update()
             elif (self.keypad.leftPressed()) :
                 # prev screen
-                self.saveValue()
+                self.saveValue(self.subIdx)
 
                 if (self.subIdx > 0) :
                     self.subIdx = self.subIdx - 1
@@ -50,7 +50,9 @@ class ScreenSettings :
                 self.subScreen = self.initEditScreen(self.subIdx)
                 self.subScreen.update()
 
-        return (self.keypad.rightPressed() or self.keypad.leftPressed())
+        self.keypad.downPressed()
+        self.keypad.upPressed()
+        return (self.subIdx == -1 and (self.keypad.rightPressed() or self.keypad.leftPressed()))
 
     def update (self) :
         if (self.subIdx != -1) :
@@ -103,19 +105,19 @@ class ScreenSettings :
 
         return scr
 
-    def saveValue (self) :
+    def saveValue (self, idx) :
         if (idx == 0) :
-            self.sett.dayDuration = self.subScreen.value()
+            self.sett.dayDuration = self.subScreen.get_value()
         elif (idx == 1) :
-            self.sett.nightDuration = self.subScreen.value()
+            self.sett.nightDuration = self.subScreen.get_value()
         elif (idx == 2) :
-            self.sett.sprayPeriod = self.subScreen.value()
+            self.sett.sprayPeriod = self.subScreen.get_value()
         elif (idx == 3) :
-            self.sett.sprayTime = self.subScreen.value()
+            self.sett.sprayTime = self.subScreen.get_value()
         elif (idx == 4) :
-            self.sett.temperatureSetpoint = self.subScreen.value()
+            self.sett.temperatureSetpoint = self.subScreen.get_value()
         elif (idx == 5) :
-            self.sett.humiditySetpoint = self.subScreen.value()
+            self.sett.humiditySetpoint = self.subScreen.get_value()
 
-        self.sett.save()
+        #self.sett.save()
 

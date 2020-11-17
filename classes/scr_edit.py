@@ -22,7 +22,7 @@ class ScreenEdit :
         self.format = format
         self.fmtString = fmt_string
 
-    def value(self) :
+    def get_value(self) :
         return self.value
 
     def process (self) :
@@ -56,7 +56,7 @@ class ScreenEdit :
             value_string = self.fmtString.format(self.value)
         elif (self.format == 1) :
             # time (hours:minutes)
-            value_string = self.fmtString.format(int(self.sett.nightDuration/60), int(self.sett.nightDuration%60))
+            value_string = self.fmtString.format(int(self.value/60), int(self.value%60))
         else :
             value_string = "{}".format(self.value)
 
@@ -69,3 +69,4 @@ class ScreenEdit :
             return 10;
 
         return 1
+

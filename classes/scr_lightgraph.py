@@ -20,6 +20,9 @@ class ScreenLightGraph :
         self.sett = sett
         self.keypad = kp
 
+    def process (self) :
+        return (self.keypad.leftPressed() or self.keypad.rightPressed())
+
     def update (self) :
         self.display.drawInit((128,128,128))
 
@@ -49,7 +52,7 @@ class ScreenLightGraph :
         lux = self.ds.get_lux()
         lux_string = f"{int(lux):,}"
         self.display.overlay_text((48, 0), lux_string, font_size=2, align_right=True, rectangle=True)
-        spacing = self.display.font.getsize(lux_string)[1] + 1
+        spacing = self.display.largefont.getsize(lux_string)[1] + 1
         if min_lux is not None and max_lux is not None:
             range_string = f"{int(min_lux):,}-{int(max_lux):,}"
         else:

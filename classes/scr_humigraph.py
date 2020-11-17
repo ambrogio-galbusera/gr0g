@@ -20,6 +20,9 @@ class ScreenHumidityGraph :
         self.sett = sett
         self.keypad = kp
 
+    def process (self) :
+        return (self.keypad.leftPressed() or self.keypad.rightPressed())
+
     def update (self) :
         self.display.drawInit((128,128,128))
 

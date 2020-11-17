@@ -22,10 +22,10 @@ class ScreenManager :
         res = self.currScreen.process()
 
         if (res == 1) :
-            if (self.keypad.left_pressed()) : 
+            if (self.keypad.leftPressed()) : 
                 # next screen
                 self.currScreen = self.nextScreen()
-            elif (self.keypad.right_pressed()) :
+            elif (self.keypad.rightPressed()) :
                 # prev screen
                 self.currScreen = self.prevScreen()
 
@@ -33,11 +33,11 @@ class ScreenManager :
 
     def nextScreen (self) :
         self.currIdx = (self.currIdx + 1) % len(self.screens)
-        self.currScreen = self.screens[self.currIdx]
+        return self.screens[self.currIdx]
 
     def prevScreen (self) :
         if (self.currIdx == 0) :
             self.currIdx = len(self.screens) - 1
         else :
             self.currIdx = self.currIdx - 1
-        self.currScreen = self.screens[self.currIdx]
+        return self.screens[self.currIdx]

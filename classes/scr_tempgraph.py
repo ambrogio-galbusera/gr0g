@@ -21,7 +21,7 @@ class ScreenTemperatureGraph :
         self.keypad = kp
 
     def process (self) :
-        print("[TMPG] TODO")
+        return (self.keypad.leftPressed() or self.keypad.rightPressed())
 
     def update (self) :
         self.display.drawInit((128,128,128))
@@ -52,7 +52,7 @@ class ScreenTemperatureGraph :
         temperature = self.ds.get_temperature()
         temp_string = f"{temperature:.0f}°C"
         self.display.overlay_text((80, 0), temp_string, font_size=2, align_right=True, rectangle=True)
-        spacing = self.display.font.getsize(temp_string)[1] + 1
+        spacing = self.display.largefont.getsize(temp_string)[1] + 1
         if min_temp is not None and max_temp is not None:
             range_string = f"{min_temp:.0f}-{max_temp:.0f}"
         else:
