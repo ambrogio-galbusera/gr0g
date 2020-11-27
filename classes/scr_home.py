@@ -1,6 +1,5 @@
 import os
 import time
-import pytz
 import colorsys
 from datetime import datetime, timedelta
 from PIL import Image, ImageDraw, ImageFont, ImageFilter

@@ -1,10 +1,6 @@
 import os
 import time
-import pytz
 import colorsys
-from pytz import timezone
-from astral.geocoder import database, lookup
-from astral.sun import sun
 from datetime import datetime, timedelta
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 

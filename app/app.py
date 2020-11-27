@@ -10,7 +10,7 @@ from condcontroller import CondController
 from fancontroller import FanController
 from evcontroller import EVController
 from datastore import DataStore
-#from sensors import Sensors
+from sensors import Sensors
 from screenmanager import ScreenManager
 from display import Display
 from appsettings import AppSettings
@@ -23,7 +23,7 @@ class App :
         self.ds = DataStore()
         self.sett = AppSettings()
         self.keypad = Keypad()
-        #self.sensors = Sensors()
+        self.sensors = Sensors()
         self.lightc = LightController(self.ds, self.sett)
         self.condc = CondController(self.ds, self.sett)
         self.fanc = FanController(self.ds, self.sett)
@@ -36,9 +36,9 @@ class App :
     def process (self) :
         delta = time.time() - self.processStart
         if (delta > 1.0) :
-            #self.ds.add_humidity(sensors.humidity())
-            #self.ds.add_temperature(sensors.temperature())
-            #self.ds.add_lux(sensors.lux())
+            self.ds.add_humidity(self.sensors.humidity())
+            self.ds.add_temperature(self.sensors.temperature())
+            self.ds.add_lux(self.sensors.lux())
 
             self.lightc.process()
             self.condc.process()
