@@ -1,6 +1,7 @@
 import time
 from led import Led
 from simple_pid import PID
+import pwm2 as rpwm
 
 class LightController :
     def __init__ (self, ds, sett) :
@@ -12,6 +13,8 @@ class LightController :
         self.isNight = False
         self.startTime = time.time()
         self.lastValue = None
+
+        rpwm.rpwm_init()
 
     def process (self) :
         # stay on for dayDuration minutes, then off for nightDuration minutes
@@ -47,4 +50,5 @@ class LightController :
             print("[LIGC] Setting LEDs to {}".format(v))
             self.led1.set(v)
             self.led2.set(v)
+            rpwm.rpwm_set(v)
             self.lastValue = v
