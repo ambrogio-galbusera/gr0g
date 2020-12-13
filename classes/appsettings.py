@@ -4,7 +4,9 @@ class AppSettings :
     nightDuration = 1
 
     # in seconds
-    sprayPeriod = 600
+    #sprayPeriod = 600
+    #sprayTime = 10
+    sprayPeriod = 10
     sprayTime = 10
 
     temperatureSetpoint = 25

@@ -29,6 +29,7 @@ class App :
         self.fanc = FanController(self.ds, self.sett)
         self.evc = EVController(self.ds, self.sett)
         self.screenMngr = ScreenManager(self.d, self.ds, self.sett, self.keypad)
+        self.screenMngr.update()
 
         self.processStart = 0
         self.screensStart = 0
@@ -58,6 +59,7 @@ class App :
 
 app = App()
 cntr = 0
+
 while True :
     app.process()
     app.handleScreens()

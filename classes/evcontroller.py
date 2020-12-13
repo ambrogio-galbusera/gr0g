@@ -1,4 +1,5 @@
 import time
+import gertutil as gu
 
 class EVController :
     def __init__ (self, ds, sett) :
@@ -12,13 +13,15 @@ class EVController :
     def process (self) :
         if (self.ev_on) :
             delta = time.time() - self.on_time
-            if (delta > 10) :
+            if (delta > self.sett.sprayTime) :
                 print("[EVC ] Closing EV");
+                gu.opendrain_set(0, 0);
                 self.ev_on = False
                 self.start_time = time.time()
         else :
             delta = time.time() - self.start_time
-            if (delta > 10) :
+            if (delta > self.sett.sprayPeriod) :
                 print("[EVC ] Firing EV");
+                gu.opendrain_set(0, 1);
                 self.ev_on = True
                 self.on_time = time.time()
