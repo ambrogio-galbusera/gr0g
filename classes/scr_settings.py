@@ -101,7 +101,7 @@ class ScreenSettings :
         elif (idx == 4) :
             scr.setProperties(title="Temperature", value=self.sett.temperatureSetpoint, min=0, max=1440, format=0, fmt_string="{0:02d}°C")
         elif (idx == 5) :
-            scr.setProperties(title="Day duration", value=self.sett.humiditySetpoint, min=0, max=100, format=0, fmt_string="{0:02d}%")
+            scr.setProperties(title="Humidity", value=self.sett.humiditySetpoint, min=0, max=100, format=0, fmt_string="{0:02d}%")
 
         return scr
 
@@ -119,5 +119,5 @@ class ScreenSettings :
         elif (idx == 5) :
             self.sett.humiditySetpoint = self.subScreen.get_value()
 
-        #self.sett.save()
+        self.sett.save()
 

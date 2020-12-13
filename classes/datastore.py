@@ -14,7 +14,8 @@ class DataStore:
     def add_humidity (self, value) :
         corr_humidity = self.correct_humidity(value, self.raw_temps[self.num_samples-1], self.temps[self.num_samples-1])
         print("[DS  ] Adding humidity: {} -> {}".format(value, corr_humidity))
-        self.humis = self.humis[1:] + [corr_humidity]
+        #self.humis = self.humis[1:] + [corr_humidity]
+        self.humis = self.humis[1:] + [value]
 
     def get_humidity (self, idx=-1) :
         if idx == -1 :

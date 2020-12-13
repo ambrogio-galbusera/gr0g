@@ -58,21 +58,21 @@ class ScreenHome :
                self.min_temp = temperature
                self.max_temp = temperature
 
-        temp_string = f"{temperature:.0f}°C"
-        self.display.overlay_text((80, 12), temp_string, font_size=2, align_right=True, rectangle=True)
+        temp_string = f"{temperature:.1f}°C"
+        self.display.overlay_text((85, 12), temp_string, font_size=2, align_right=True, rectangle=True)
         spacing = self.display.largefont.getsize(temp_string)[1] + 1
         if self.min_temp is not None and self.max_temp is not None:
             range_string = f"{self.min_temp:.0f}-{self.max_temp:.0f}"
         else:
             range_string = "------"
-        self.display.overlay_text((80, 12 + spacing), range_string, font_size=0, align_right=True, rectangle=True)
+        self.display.overlay_text((85, 12 + spacing), range_string, font_size=0, align_right=True, rectangle=True)
         temp_icon = Image.open(f"{path}/icons/temperature.png")
         self.display.icon((self.margin, 12), temp_icon)
 
         # Humidity
         humidity = self.ds.get_humidity()
-        humidity_string = f"{humidity:.0f}%"
-        self.display.overlay_text((80, 48), humidity_string, font_size=2, align_right=True, rectangle=True)
+        humidity_string = f"{humidity:.1f}%"
+        self.display.overlay_text((85, 48), humidity_string, font_size=2, align_right=True, rectangle=True)
         humidity_icon = Image.open(f"{path}/icons/humidity.png")
         self.display.icon((self.margin, 48), humidity_icon)
 
@@ -81,7 +81,7 @@ class ScreenHome :
         light_string = f"{int(light):,}"
         self.display.overlay_text((self.display.WIDTH - self.margin, 12), light_string, font_size=2, align_right=True, rectangle=True)
         light_icon = Image.open(f"{path}/icons/bulb-light.png")
-        self.display.icon((90, 12), light_icon)
+        self.display.icon((100, 12), light_icon)
 
         self.display.update()
 

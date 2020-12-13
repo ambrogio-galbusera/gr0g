@@ -1,7 +1,7 @@
 import gertutil as gu
 
 class Condenser:
-    cond_channel = 1
+    cond_channel = 3
     cond_freq = 1000
 
     def __init__ (self) :
@@ -12,6 +12,10 @@ class Condenser:
     def set (self,dc) :
         print("[COND] Setting PWM to {}".format(dc))
         gu.pwm_set(self.cond_channel,self.cond_freq,dc)
+        if (dc > 10) :
+            gu.opendrain_set(1, 1)
+        else :
+            gu.opendrain_set(1, 0)
 
     def off (self) :
         print("[COND] Power off")

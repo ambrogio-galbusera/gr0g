@@ -1,7 +1,7 @@
 import gertutil as gu
 
 class Fan:
-    fan_channel = 0
+    fan_channel = 2
     fan_freq = 1000
 
     def __init__ (self) :
