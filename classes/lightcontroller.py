@@ -13,8 +13,28 @@ class LightController :
         self.isNight = False
         self.startTime = time.time()
         self.lastValue = None
+        self.override = False
 
         rpwm.rpwm_init()
+
+    def set(self, state) :
+        if (state == 0) :
+            self.override = True
+            v = 0
+            self.led1.set(v)
+            self.led2.set(v)
+            rpwm.rpwm_set(v)
+            self.lastValue = v
+        elif (state == 1) :
+            self.override = True
+            v = 100
+            self.led1.set(v)
+            self.led2.set(v)
+            rpwm.rpwm_set(v)
+            self.lastValue = v
+        elif (state == 2) :
+            self.override = False
+            self.lastValue = None
 
     def process (self) :
         # stay on for dayDuration minutes, then off for nightDuration minutes
