@@ -37,10 +37,10 @@ class App :
         self.sett = AppSettings()
         self.keypad = Keypad()
         self.sensors = Sensors()
-        self.lightc = None #LightController(self.ds, self.sett)
-        self.condc = None #CondController(self.ds, self.sett)
-        self.fanc = None #FanController(self.ds, self.sett)
-        self.evc = None #EVController(self.ds, self.sett)
+        self.lightc = LightController(self.ds, self.sett)
+        self.condc = CondController(self.ds, self.sett)
+        self.fanc = FanController(self.ds, self.sett)
+        self.evc = EVController(self.ds, self.sett)
         self.screenMngr = ScreenManager(self.d, self.ds, self.sett, self.keypad)
         self.screenMngr.update()
 
@@ -89,9 +89,9 @@ def mainThread(runEvent):
 try:
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
-    session_bus = dbus.SessionBus()
-    name = dbus.service.BusName("com.ag.gr0g", session_bus)
-    object = TheGr0g(app.ds, app.sett, app.lightc, session_bus, '/gr0g')
+    bus = dbus.SystemBus()
+    name = dbus.service.BusName("com.ag.gr0g", bus)
+    object = TheGr0g(app.ds, app.sett, app.lightc, bus, '/gr0g')
 
     runEvent = threading.Event()
     runEvent.set()
@@ -100,7 +100,7 @@ try:
     mainT.start()
 
     mainloop = gobject.MainLoop()
-    print ("Running example service.")
+    print ("[MAIN]: Running D-Bus service")
     mainloop.run()
 
 except (KeyboardInterrupt, SystemExit):

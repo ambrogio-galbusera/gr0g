@@ -38,7 +38,7 @@ class TheGr0g(dbus.service.Object):
         print ("cmds " + cmd +":" + value)
         if (cmd == "setlight") :
             if (self.lightc != None) :
-                self.lightc.set(value)
+                self.lightc.set(int(value))
         elif (cmd == "humidity_setpoint") :
             self.sett.humiditySetpoint = value
         elif (cmd == "temperature_setpoint") :

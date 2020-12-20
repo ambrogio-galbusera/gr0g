@@ -6,7 +6,7 @@ sys.path.append(parentdir + "/external")
 
 import gertbot as gb
 
-board = 0
+board = -1
 d0 = 0
 d1 = 0
 peltier_channel = 3
@@ -17,6 +17,11 @@ inited = 0
 def pwm_init (channel) :
    # Set channel for brushed and start motor
    global inited
+   global board
+
+   if (board == -1) :
+       return
+
    if inited == 0 :
        gb.open_uart(0)
        version = gb.get_version(board)
@@ -27,16 +32,30 @@ def pwm_init (channel) :
    gb.move_brushed(board,channel,gb.MOVE_B)
 
 def pwm_set (channel,freq,dc) :
+   global board
+
+   if (board == -1) :
+       return
+
    gb.read_error_status(board)
    gb.pwm_brushed(board,channel,freq,dc)
 
 def pwm_off (channel) :
+   global board
+
+   if (board == -1) :
+      return
+
    gb.set_mode(board,channel,gb.MODE_OFF)
 
 def opendrain_set(d,on) :
    global d0
    global d1
    global inited
+   global board
+
+   if (board == -1) :
+       return
 
    if inited == 0:
        gb.open_uart(0)

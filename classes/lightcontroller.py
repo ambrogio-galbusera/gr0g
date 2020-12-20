@@ -18,6 +18,7 @@ class LightController :
         rpwm.rpwm_init()
 
     def set(self, state) :
+        print("[LIGC] Setting state to " + repr(state))
         if (state == 0) :
             self.override = True
             v = 0
@@ -42,6 +43,9 @@ class LightController :
         # 10-90% of day duration -> full
         # 90-100% of day duration -> dim down
         # nightDuration -> off
+        if (self.override) :
+            return
+
         delta = time.time() - self.startTime
         v = 0
 
